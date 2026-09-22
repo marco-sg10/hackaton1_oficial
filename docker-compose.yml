@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: branch-engine-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - branch_engine_pgdata:/var/lib/postgresql/data
+
+volumes:
+  branch_engine_pgdata:

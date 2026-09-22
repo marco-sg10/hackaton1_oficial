@@ -25,12 +25,14 @@ class Checkpoint5Asincronia {
     private static String textoDecision;
 
     private static final String PISTA_SMTP = """
-                Los autotests levantan un servidor SMTP en localhost:2525 y esperan el
-                correo ahi. Comprueba que tu .env tiene MAIL_HOST=localhost y
-                MAIL_PORT=2525, y que de verdad usas JavaMailSender: guardar la fila
-                en RealityLog sin enviar nada no cuenta.""";
+            Los autotests levantan un servidor SMTP en localhost:2525 y esperan el
+            correo ahi. Comprueba que tu .env tiene MAIL_HOST=localhost y
+            MAIL_PORT=2525, y que de verdad usas JavaMailSender: guardar la fila
+            en RealityLog sin enviar nada no cuenta.""";
 
-    /** Espera a que la decision llegue al estado pedido. Devuelve la ultima respuesta vista. */
+    /**
+     * Espera a que la decision llegue al estado pedido. Devuelve la ultima respuesta vista.
+     */
     private static Api.Res esperarEstado(int decision, String objetivo, int segundos) {
         long limite = System.currentTimeMillis() + segundos * 1000L;
         Api.Res ultima = null;
@@ -79,14 +81,14 @@ class Checkpoint5Asincronia {
         Verificar.igual("ESTABILIZADA", res.texto("status"),
                 "En menos de 25 s la decision pasa a ESTABILIZADA",
                 """
-                Si se quedo en REGISTRADA, el listener no llego a ejecutarse:
-                  · falta publicar DecisionCommittedEvent con ApplicationEventPublisher
-                  · o falta @TransactionalEventListener(phase = AFTER_COMMIT)
-                  · o falta @EnableAsync en alguna @Configuration
-                Si llego a ERROR, el listener SI corrio pero el correo fallo de verdad:
-                  · revisa el log.error del listener en la consola de tu app
-                  · revisa MAIL_HOST=localhost y MAIL_PORT=2525 en tu .env: ahi escucha
-                    el servidor SMTP de los autotests""");
+                        Si se quedo en REGISTRADA, el listener no llego a ejecutarse:
+                          · falta publicar DecisionCommittedEvent con ApplicationEventPublisher
+                          · o falta @TransactionalEventListener(phase = AFTER_COMMIT)
+                          · o falta @EnableAsync en alguna @Configuration
+                        Si llego a ERROR, el listener SI corrio pero el correo fallo de verdad:
+                          · revisa el log.error del listener en la consola de tu app
+                          · revisa MAIL_HOST=localhost y MAIL_PORT=2525 en tu .env: ahi escucha
+                            el servidor SMTP de los autotests""");
     }
 
     @Test

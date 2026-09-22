@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * Estado compartido entre estrellas: lo que una crea, la siguiente lo usa.
- *
+ * <p>
  * Todo lo que se crea lleva el sufijo de la corrida, asi que los autotests se pueden
  * ejecutar veinte veces seguidas contra la misma base de datos sin chocar entre si
  * ni con los datos que el equipo haya metido a mano.
@@ -14,7 +14,9 @@ final class Estado {
 
     static final String RUN = Long.toString(System.currentTimeMillis(), 36).toUpperCase();
 
-    /** Credenciales del admin. Estan fijadas en el enunciado y en el .env del equipo. */
+    /**
+     * Credenciales del admin. Estan fijadas en el enunciado y en el .env del equipo.
+     */
     static final String ADMIN_EMAIL = "colin@tuckersoft.co.uk";
     static final String ADMIN_PASSWORD = "colin1984";
 

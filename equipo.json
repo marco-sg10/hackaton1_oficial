@@ -1,8 +1,17 @@
 {
-  "equipo": "G00",
+  "equipo": "G20",
   "integrantes": [
-    { "nombre": "Nombre Apellido", "codigo": "CODIGO UTEC" },
-    { "nombre": "Nombre Apellido", "codigo": "CODIGO UTEC" },
-    { "nombre": "Nombre Apellido", "codigo": "CODIGO UTEC" }
+    {
+      "nombre": "Marco Sabino Guardian",
+      "codigo": "202220340"
+    },
+    {
+      "nombre": "Jose Miguel",
+      "codigo": "202110232"
+    },
+    {
+      "nombre": "Juan Diego",
+      "codigo": "202510213"
+    }
   ]
 }

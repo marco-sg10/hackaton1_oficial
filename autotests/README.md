@@ -89,11 +89,11 @@ Más arriba, en la salida de Maven, está el detalle del fallo:
 Al terminar cada corrida, los autotests publican tu resultado en el tablero que se
 proyecta en el auditorio. Verás una de estas líneas debajo del marcador:
 
-| Línea | Qué significa |
-|:--|:--|
-| `tablero: publicado como "G07"` | Listo, ya apareces. |
+| Línea                                               | Qué significa                                          |
+|:----------------------------------------------------|:-------------------------------------------------------|
+| `tablero: publicado como "G07"`                     | Listo, ya apareces.                                    |
 | `tablero: no se publico — completa equipo.json ...` | Tu `equipo.json` todavía tiene los valores de ejemplo. |
-| `tablero: no alcanzable — tus estrellas no cambian` | Sin internet o el tablero no responde. No pasa nada. |
+| `tablero: no alcanzable — tus estrellas no cambian` | Sin internet o el tablero no responde. No pasa nada.   |
 
 **El tablero es solo informativo.** Lo que cuenta es el resultado en tu terminal y la
 revisión del TA. Si el tablero falla, tus tests no se enteran.
@@ -128,13 +128,13 @@ y pon ese mismo puerto en `MAIL_PORT` de tu `.env`.
 
 ## Si algo no funciona
 
-| Mensaje | Qué pasa |
-|:--|:--|
-| `No hay nadie escuchando en http://localhost:8080` | Tu app no está corriendo, o está en otro puerto. Arráncala en la terminal 1. |
-| `Timeout de 30s` | Un endpoint tuyo se quedó colgado. Mira la consola de tu app. |
-| Todo en `no evaluado` y la ★1 falla | Empieza por seguridad: registro, login y el filtro de JWT. |
-| `Tests run: 0` | Estás corriendo Maven en la carpeta equivocada. Tiene que ser dentro de `autotests/`. |
-| `No se pudo levantar el servidor SMTP` | El puerto 2525 está ocupado. Usa `-Dsmtp.port=3025` y ajusta tu `.env`. |
+| Mensaje                                            | Qué pasa                                                                              |
+|:---------------------------------------------------|:--------------------------------------------------------------------------------------|
+| `No hay nadie escuchando en http://localhost:8080` | Tu app no está corriendo, o está en otro puerto. Arráncala en la terminal 1.          |
+| `Timeout de 30s`                                   | Un endpoint tuyo se quedó colgado. Mira la consola de tu app.                         |
+| Todo en `no evaluado` y la ★1 falla                | Empieza por seguridad: registro, login y el filtro de JWT.                            |
+| `Tests run: 0`                                     | Estás corriendo Maven en la carpeta equivocada. Tiene que ser dentro de `autotests/`. |
+| `No se pudo levantar el servidor SMTP`             | El puerto 2525 está ocupado. Usa `-Dsmtp.port=3025` y ajusta tu `.env`.               |
 
 ### Apuntar a otro puerto
 
@@ -148,10 +148,10 @@ Si levantaste tu app en un puerto distinto al 8080:
 
 ## Qué comprueba cada estrella
 
-| Estrella | Cubre |
-|:--|:--|
-| ★1 SEGURIDAD | Registro, login, JWT, roles, el admin del `DataInitializer`, que `password` no se filtre nunca |
-| ★2 NODOS | Permisos de admin, valores iniciales, unicidad, validaciones, 404 |
-| ★3 PARTIDAS | Valores iniciales, capacidad del nodo, aislamiento entre usuarios, recorrido vacío |
-| ★4 DECISIONES | Las cinco reglas de clasificación, precedencia, tildes, stats, nodo destino, entradas corruptas, los tres finales, filtros y paginación |
+| Estrella      | Cubre                                                                                                                                                     |
+|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ★1 SEGURIDAD  | Registro, login, JWT, roles, el admin del `DataInitializer`, que `password` no se filtre nunca                                                            |
+| ★2 NODOS      | Permisos de admin, valores iniciales, unicidad, validaciones, 404                                                                                         |
+| ★3 PARTIDAS   | Valores iniciales, capacidad del nodo, aislamiento entre usuarios, recorrido vacío                                                                        |
+| ★4 DECISIONES | Las cinco reglas de clasificación, precedencia, tildes, stats, nodo destino, entradas corruptas, los tres finales, filtros y paginación                   |
 | ★5 ASINCRONIA | El 201 inmediato, el listener tras el commit, `RealityLog`, **el correo recibido de verdad con su asunto y su cuerpo**, el fallo de correo y el recorrido |

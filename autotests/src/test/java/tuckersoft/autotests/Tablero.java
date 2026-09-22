@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * Publica el resultado de la corrida en el tablero del auditorio.
- *
+ * <p>
  * Es informativo: la nota sale de la revision del TA, no de aqui. Por eso nada de lo
  * que pase en esta clase puede afectar a los tests. Si el tablero no responde, si no
  * hay internet o si equipo.json esta a medias, se imprime una linea y ya.
@@ -37,7 +37,9 @@ final class Tablero {
     private static final List<String> MARCADORES = List.of(
             "g00", "nombre apellido", "codigo utec", "codigo", "");
 
-    /** Devuelve la linea que se imprime en el resumen. */
+    /**
+     * Devuelve la linea que se imprime en el resumen.
+     */
     static String reportar(int estrellas) {
         try {
             String destino = System.getProperty("tablero.url", URL_POR_DEFECTO);
@@ -98,7 +100,9 @@ final class Tablero {
         }
     }
 
-    /** equipo.json vive en la raiz del repositorio, un nivel por encima de autotests/. */
+    /**
+     * equipo.json vive en la raiz del repositorio, un nivel por encima de autotests/.
+     */
     private static JsonNode leerEquipo() {
         String base = System.getProperty("basedir", System.getProperty("user.dir"));
         for (File candidato : new File[]{new File(base, "../equipo.json"), new File(base, "equipo.json")}) {

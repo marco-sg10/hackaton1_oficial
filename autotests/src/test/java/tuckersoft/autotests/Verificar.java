@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * Aserciones con mensajes largos a proposito.
- *
+ * <p>
  * El alumno no tiene al TA al lado: el mensaje de fallo es toda la ayuda que va a
  * recibir, asi que dice que se esperaba, que llego, la respuesta cruda y una pista
  * concreta de donde mirar.
@@ -62,7 +62,9 @@ final class Verificar {
         };
     }
 
-    /** Comprueba que el cuerpo trae el campo y no es nulo. */
+    /**
+     * Comprueba que el cuerpo trae el campo y no es nulo.
+     */
     static void campo(Api.Res res, String campo, String contexto) {
         que(res.body() != null && res.body().hasNonNull(campo),
                 contexto + " debe incluir el campo '" + campo + "'",
@@ -71,7 +73,9 @@ final class Verificar {
                 "Revisa tu DTO de respuesta: probablemente ese campo no esta mapeado.");
     }
 
-    /** Comprueba que el cuerpo NO trae el campo. Se usa para 'password'. */
+    /**
+     * Comprueba que el cuerpo NO trae el campo. Se usa para 'password'.
+     */
     static void sinCampo(Api.Res res, String campo, String contexto) {
         boolean aparece = res.raw() != null && res.raw().contains("\"" + campo + "\"");
         que(!aparece,
@@ -81,7 +85,9 @@ final class Verificar {
                 "Devuelve un DTO, no la entidad JPA. Si expones la entidad, expones la contrasena.");
     }
 
-    /** El formato de error del enunciado: error, message, timestamp, path. */
+    /**
+     * El formato de error del enunciado: error, message, timestamp, path.
+     */
     static void formatoError(Api.Res res, String contexto) {
         for (String campo : List.of("error", "message", "timestamp", "path")) {
             que(res.body() != null && res.body().hasNonNull(campo),
@@ -94,7 +100,9 @@ final class Verificar {
         }
     }
 
-    /** La estructura de pagina del enunciado. */
+    /**
+     * La estructura de pagina del enunciado.
+     */
     static void formatoPagina(Api.Res res, int page, int size, String contexto) {
         que(res.campo("content") != null && res.campo("content").isArray(),
                 contexto + " debe devolver 'content' como array",
@@ -114,7 +122,9 @@ final class Verificar {
                 contexto, "un array con al menos un elemento", res.resumen(), pista);
     }
 
-    /** Busca dentro de un array el primer objeto cuyo campo valga lo pedido. */
+    /**
+     * Busca dentro de un array el primer objeto cuyo campo valga lo pedido.
+     */
     static JsonNode buscar(Api.Res res, String campo, String valor) {
         if (res.body() == null || !res.body().isArray()) return null;
         for (JsonNode n : res.body()) {

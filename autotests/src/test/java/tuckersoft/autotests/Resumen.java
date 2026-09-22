@@ -5,7 +5,7 @@ import org.junit.platform.launcher.TestPlan;
 
 /**
  * Imprime el marcador al final de la corrida.
- *
+ * <p>
  * Se registra por ServiceLoader (src/test/resources/META-INF/services). Surefire ya
  * imprime los fallos; esto es lo que el alumno lee primero para saber donde esta.
  */

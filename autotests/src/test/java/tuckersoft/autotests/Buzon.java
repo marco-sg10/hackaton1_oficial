@@ -8,17 +8,19 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * Servidor SMTP de pruebas.
- *
+ * <p>
  * Los autotests reciben los correos de verdad en vez de creerse la fila que el equipo
  * guardo en RealityLog. Asi se comprueba el asunto y el cuerpo reales, y un
  * JavaMailSender falso no cuela.
- *
+ * <p>
  * Se levanta una sola vez y escucha durante toda la corrida, porque las decisiones de
  * las estrellas anteriores tambien disparan correos.
  */
 final class Buzon {
 
-    /** Puerto del servidor de pruebas. El .env del equipo apunta aqui. */
+    /**
+     * Puerto del servidor de pruebas. El .env del equipo apunta aqui.
+     */
     static final int PUERTO = Integer.getInteger("smtp.port", 2525);
 
     private static GreenMail servidor;
@@ -52,7 +54,9 @@ final class Buzon {
         }
     }
 
-    /** Espera a que llegue un correo con ese asunto exacto. */
+    /**
+     * Espera a que llegue un correo con ese asunto exacto.
+     */
     static MimeMessage esperarPorAsunto(String asunto, int segundos) {
         long limite = System.currentTimeMillis() + segundos * 1000L;
         while (System.currentTimeMillis() < limite) {
@@ -84,7 +88,9 @@ final class Buzon {
         return servidor == null ? 0 : servidor.getReceivedMessages().length;
     }
 
-    /** Asuntos recibidos, para el mensaje de error cuando no aparece el esperado. */
+    /**
+     * Asuntos recibidos, para el mensaje de error cuando no aparece el esperado.
+     */
     static String asuntosRecibidos() {
         if (servidor == null || servidor.getReceivedMessages().length == 0) {
             return "(no llego ningun correo al servidor de pruebas)";
@@ -100,7 +106,9 @@ final class Buzon {
         return sb.toString();
     }
 
-    /** Cuerpo del mensaje en texto plano, ya decodificado. */
+    /**
+     * Cuerpo del mensaje en texto plano, ya decodificado.
+     */
     static String cuerpo(MimeMessage mensaje) {
         try {
             Object contenido = mensaje.getContent();

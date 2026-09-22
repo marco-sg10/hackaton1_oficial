@@ -18,9 +18,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 class Checkpoint1Seguridad {
 
     private static final String PISTA_ROL_BD = """
-                Las autoridades se cargan de la base de datos en cada peticion, via
-                UserDetailsService. Si metes el rol dentro del JWT, el token viejo
-                sigue diciendo ROLE_USER y esto falla.""";
+            Las autoridades se cargan de la base de datos en cada peticion, via
+            UserDetailsService. Si metes el rol dentro del JWT, el token viejo
+            sigue diciendo ROLE_USER y esto falla.""";
 
     private static ObjectNode registro(String email, String password, String displayName) {
         ObjectNode b = Api.json();
@@ -169,8 +169,8 @@ class Checkpoint1Seguridad {
         Verificar.igual("ROLE_ADMIN", res.texto("role"),
                 "El usuario administrador tiene ROLE_ADMIN",
                 "Si aqui ves ROLE_USER, el administrador quedo degradado en tu base de datos. "
-                + "El DataInitializer no lo arregla porque el usuario ya existe: o corriges el "
-                + "rol a mano en PostgreSQL, o borras y recreas la base.");
+                        + "El DataInitializer no lo arregla porque el usuario ya existe: o corriges el "
+                        + "rol a mano en PostgreSQL, o borras y recreas la base.");
         Estado.tokenAdmin = res.texto("token");
     }
 

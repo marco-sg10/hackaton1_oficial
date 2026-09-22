@@ -2,7 +2,9 @@ package tuckersoft.autotests;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-/** Utilidades compartidas por las estrellas 4 y 5. */
+/**
+ * Utilidades compartidas por las estrellas 4 y 5.
+ */
 final class Decisiones {
 
     static int nuevaPartida(String nodoInicial, String sufijo) {
@@ -26,7 +28,9 @@ final class Decisiones {
         return Api.post("/api/v1/decisions", cuerpo, Estado.tokenUno, simulate);
     }
 
-    /** Envia una decision y comprueba solo la rama que el motor le asigno. */
+    /**
+     * Envia una decision y comprueba solo la rama que el motor le asigno.
+     */
     static Api.Res clasificar(int partida, String texto, String ramaEsperada, String porque) {
         Api.Res res = decidir(partida, texto, "LEVE");
         Verificar.estado(201, res, "POST /api/v1/decisions responde 201 para: \"" + recortar(texto) + "\"");

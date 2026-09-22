@@ -11,12 +11,16 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-/** Cliente HTTP contra el Branch Engine del equipo. Caja negra: solo habla por HTTP. */
+/**
+ * Cliente HTTP contra el Branch Engine del equipo. Caja negra: solo habla por HTTP.
+ */
 final class Api {
 
     static final ObjectMapper MAPPER = new ObjectMapper();
 
-    /** URL de la app. Se puede cambiar con -Dbase.url=... o la variable QA_URL. */
+    /**
+     * URL de la app. Se puede cambiar con -Dbase.url=... o la variable QA_URL.
+     */
     static final String BASE = resolverBase();
 
     private static final HttpClient CLIENTE = HttpClient.newBuilder()
@@ -33,7 +37,9 @@ final class Api {
         return url.endsWith("/") ? url.substring(0, url.length() - 1) : url;
     }
 
-    /** Respuesta con el tiempo que tardo: la estrella 5 lo necesita. */
+    /**
+     * Respuesta con el tiempo que tardo: la estrella 5 lo necesita.
+     */
     record Res(int status, JsonNode body, String raw, long millis) {
 
         JsonNode campo(String nombre) {
@@ -55,7 +61,9 @@ final class Api {
             return n == null || n.isNull();
         }
 
-        /** Trozo legible del cuerpo para los mensajes de error. */
+        /**
+         * Trozo legible del cuerpo para los mensajes de error.
+         */
         String resumen() {
             if (raw == null || raw.isBlank()) return "(cuerpo vacio)";
             String plano = raw.replaceAll("\\s+", " ").trim();
@@ -63,7 +71,9 @@ final class Api {
         }
     }
 
-    /** La app no responde: no tiene sentido seguir evaluando. */
+    /**
+     * La app no responde: no tiene sentido seguir evaluando.
+     */
     static final class SinRespuesta extends RuntimeException {
         SinRespuesta(String mensaje) {
             super(mensaje);
@@ -96,7 +106,9 @@ final class Api {
                 .method("PATCH", HttpRequest.BodyPublishers.ofString(cuerpo.toString())), ruta);
     }
 
-    /** POST con una cabecera Authorization cruda, para probar tokens rotos. */
+    /**
+     * POST con una cabecera Authorization cruda, para probar tokens rotos.
+     */
     static Res postConAuthCrudo(String ruta, ObjectNode cuerpo, String authorization) {
         HttpRequest.Builder b = HttpRequest.newBuilder(URI.create(BASE + ruta))
                 .header("Content-Type", "application/json")
@@ -136,7 +148,7 @@ final class Api {
         } catch (ConnectException e) {
             throw new SinRespuesta("""
                     No hay nadie escuchando en %s
-
+                    
                     Levanta tu aplicacion en OTRA terminal antes de correr los autotests:
                         ./mvnw spring-boot:run     (desde la raiz del repositorio)
                     """.formatted(BASE));

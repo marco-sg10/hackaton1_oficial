@@ -11,7 +11,7 @@ import java.util.Optional;
 
 /**
  * Encadena las cinco estrellas: cada una solo se evalua si la anterior paso entera.
- *
+ * <p>
  * Sin esto, un fallo en la ★1 produce cuarenta fallos en cascada y el alumno no sabe
  * por donde empezar. Con esto ve un unico fallo real y el resto como "no evaluado".
  */
@@ -55,7 +55,7 @@ final class Checkpoints implements BeforeAllCallback, BeforeEachCallback, TestWa
 
     /**
      * Una vez que un test de la clase falla, el resto se aborta.
-     *
+     * <p>
      * Sin esto el alumno ve el fallo real seguido de cinco fallos derivados
      * ("no existe la decision con id 0") que no le dicen nada y le hacen perder
      * el tiempo buscando en el sitio equivocado.
